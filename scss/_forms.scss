@@ -1,0 +1,44 @@
+form {
+	margin-bottom: 20px;
+
+	label {
+		display: block;
+		font-family: 'Gotham-Medium';
+		font-size: 12px;
+		letter-spacing: $letter-spacing;
+		list-style-type: none;
+		margin-bottom: 5px;
+		text-transform: uppercase;
+		width: 100%;
+	}
+
+	input[type='text'], input[type='email'], input[type='password'] {
+		border: 1px solid $border-color;
+		border-radius: 2px;
+		display: block;
+		margin-bottom: 20px;
+		padding: 8px 10px;
+		width: 100%;
+	}
+
+	input[type='checkbox'] {
+		margin: 0;
+	}
+
+	button[type='button'], input[type='submit'] {
+		background: #333;
+		border: 0px;
+		color: white;
+		font-family: 'Gotham-Medium';
+		letter-spacing: $letter-spacing;
+		padding: 10px 0;
+		margin-top: 20px;
+		text-transform: uppercase;
+		width: 100%;
+	}
+
+	.error {
+		color: red;
+		display: none;
+	}
+}

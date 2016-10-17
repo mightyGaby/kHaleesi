@@ -1,0 +1,35 @@
+@import 'base';
+@import 'buttons';
+@import 'fonts';
+@import 'forms';
+
+body {  
+	background: #FFF;
+	color: $primary-color;
+	height: 100%; 
+}
+
+ul {
+	padding-left: 0;
+	padding-right: 0;
+	margin-bottom: 0px;
+
+	li {
+		list-style-type: none;
+	}
+}
+
+.link {
+	color: $link-color;
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 960px) {
+
+}
