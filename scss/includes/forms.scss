@@ -12,13 +12,17 @@ form {
 		width: 100%;
 	}
 
-	input[type='text'], input[type='email'], input[type='password'] {
+	input[type='text'], input[type='email'], input[type='password'], input[type='number'] {
 		border: 1px solid $border-color;
 		border-radius: 2px;
 		display: block;
 		margin-bottom: 20px;
 		padding: 8px 10px;
 		width: 100%;
+
+		&.error {
+			border-color: red;
+		}
 	}
 
 	input[type='checkbox'] {
@@ -37,8 +41,9 @@ form {
 		width: 100%;
 	}
 
-	.error {
+	p.error {
 		color: red;
 		display: none;
+		margin-top: -10px;
 	}
 }

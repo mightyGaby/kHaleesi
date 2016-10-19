@@ -64,7 +64,7 @@ gulp.task('watch', function() {
     gulp.watch('css/*.css', ['minify-css']);
 
 	// Watch the .js files for changes and run 'scripts' task
-	gulp.watch(['./app/*.js', './app/pages/*.js'], ['scripts']);
+	gulp.watch(['./app/*.jsx', './app/pages/*.jsx'], ['scripts']);
 });
  
 gulp.task('default', ['scripts','watch','sass','minify-css']);
@@ -74,7 +74,8 @@ function bundleApp(isProduction) {
 	scriptsCount++;
 
 	var appBundler = browserify({
-    	entries: ['./app/app.js'],
+    	entries: './app/app.jsx',
+    	extensions: ['.jsx', '.js'],
     	debug: true
   	})
 

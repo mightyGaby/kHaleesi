@@ -21,10 +21,11 @@ export default class FormInput extends React.Component {
     render() {
         return (
             <div>
-                <label>{this.props.label}</label>
+                <label htmlFor={this.props.name}>{this.props.label}</label>
                 <input
                     type={this.props.type}
                     value={this.state.value}
+                    id={this.props.name}
                     name={this.props.name}
                     placeholder={this.props.label}
                     onChange={this.handleChange}

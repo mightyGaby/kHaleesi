@@ -13,6 +13,7 @@ ReactDOM.render(
 		<Route path='/' component={Layout}>
 			<IndexRoute component={Login}></IndexRoute>
 			<Route path='signup' component={Signup}></Route>
+			<Route path='appContent' component={Signup}></Route>
 		</Route>
 	</Router>,
 document.getElementById('app'));
