@@ -24,7 +24,7 @@ export default class Signup extends React.Component {
     }
 
     submit() {
-        this.props.history.replaceState(null, 'main');
+        this.props.history.replaceState(null, 'contact');
     }
 
     render() {

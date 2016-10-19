@@ -1,127 +1,130 @@
-export const khaleesi =[
+export const khaleesi = [
   {
-    "firstName":"Joe",
+    "firstName": "Joe",
     "lastName": "Slater",
-    "userName":"slater407",
-    "phone": ,
-    "uuid":"123456",
+    "userName": "slater407",
+    "emailAddress": "test@gmail.com",
+    "phone": "",
+    "uuid": "123456",
     "NOH": false, // naloxone on hand - boolean
     "available": false,  // boolean - defaults to false until khaleesi confirms availabile
     "location": {
-      "lat": ,
-      "lng":
+      "lat": "",
+      "lng": ""
     },
     "users": {
-      "name":"",
-      "uuid":"",
-      "status":""
+      "name": "",
+      "uuid": "",
+      "status": "",
+      "phone": ""
     }
   },
   {
-    "firstName":"Gaby",
+    "firstName": "Gaby",
     "lastName": "Ruiz-Funes",
-    "userName":"gabgirl24",
-    "phone": ,
-    "uuid":"",
+    "userName": "gabgirl24",
+    "emailAddress": "test@gmail.com",
+    "phone": "",
+    "uuid": "",
     "NOH": true, // naloxone on hand - boolean
     "available": false,  // boolean - defaults to false until khaleesi confirms availabile
     "location": {
-      "lat": ,
-      "lng":
+      "lat": "",
+      "lng": ""
     },
     "users": {
-      "firstName":"",
-      "uuid":"",
+      "firstName": "",
+      "uuid": "",
       "status":"",
-      "phone":
+      "phone": ""
     }
   }
-]
+];
 
 export const user =[
   {
-    "firstName":"",
+    "firstName": "",
     "lastName": "",
-    "userName":"",
-    "phone": ,
+    "userName": "",
+    "phone": "",
     "uuid":"",
     "triggered": "",  // boolean
     "location": {
-      "lat": ,
-      "lng":
+      "lat": "",
+      "lng": ""
     },
     "khaleesis": {
       "firstName":"",
-      "uuid":"",
+      "uuid": "",
       "available": false,
       "notified": false,
-      "phone": 
+      "phone": ""
     }
   },
   {
-    "firstName":"",
+    "firstName": "",
     "lastName": "",
-    "userName":"",
-    "uuid":"",
+    "userName": "",
+    "uuid": "",
     "triggered": "",  // bolean
     "location": {
-      "lat": ,
-      "lng":
+      "lat": "",
+      "lng": ""
     },
     "khaleesis": {
-      "firstName":"",
-      "uuid":"",
+      "firstName": "",
+      "uuid": "",
       "available": false,
       "notified": false,
-      "phone": 
+      "phone": ""
     }
   }
-]
+];
 
-eport const box = [
+export const box = [
   {
-    "boxId": ,
+    "boxId": "",
     "landmark": "",
     "empty": false, // boolean
     "PIN": {
       "code": 242451,
       "PinActivated": false,
-      "timeGenerated":,
-      "expires":
+      "timeGenerated": "",
+      "expires": ""
     },
     "location": {
-      "lat": ,
-      "lng":
+      "lat": "",
+      "lng": ""
     },
   },
   {
-    "boxId": ,
+    "boxId": "",
     "landmark": "",
     "empty": false, // boolean
     "PIN": {
       "code": 242451,
       "PinActivated": true,
-      "timeGenerated":,
-      "expires":
+      "timeGenerated": "",
+      "expires": ""
     },
     "location": {
-      "lat": ,
-      "lng":
+      "lat": "",
+      "lng": ""
     },
   },
   {
-    "boxId": ,
+    "boxId": "",
     "landmark": "",
     "empty": true, // boolean
     "PIN": {
       "code": 111111,
       "PinActivated": false,
-      "timeGenerated":,
-      "expires":
+      "timeGenerated": "",
+      "expires": ""
     },
     "location": {
-      "lat": ,
-      "lng":
+      "lat": "",
+      "lng": ""
     },
   }
-]
+];
