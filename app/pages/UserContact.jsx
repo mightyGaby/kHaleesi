@@ -3,15 +3,29 @@ import React from 'react';
 import {Link} from 'react-router';
 
 export default class UserContact extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            khaleesi : []
+        };
     }
 
+    // componentDidMount() {
+    //     $.ajax({        
+    //         url: 'data.json',
+    //         dataType: 'json',           
+    //         success: function(data) {
+    //           this.setState({datajson: data});
+    //         }.bind(this)
+    //   });
+    // }
+
     render() {
-        let filterItems = this.props.filters.map((filters, i) => {
-            return <Filter key={i} filters={filters} />;
-        });
-        
-        return <ResultsContainer filter={this.state.filter} />;
+        return(
+            <div>
+                <p>test</p>
+            </div>  
+        );
     }
 }
