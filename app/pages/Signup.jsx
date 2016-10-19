@@ -8,23 +8,23 @@ export default class Signup extends React.Component {
         super();
     }
 
-    onclick_submit(e) {
-        e.preventDefault();
+    onclick_submit() {
+        //e.preventDefault();
 
         let password = $("input[name='password']"),
             confirmPassword = $("input[name='confirmPassword']");
 
-        if(password.val() === confirmPassword.val()) {
-            this.submit = this.submit.bind(this);
-        } else {
-            $('.error').show();
-            password.addClass('error');
-            confirmPassword.addClass('error');
-        }
+        this.props.history.replace(null, '/');
+        //if(password.val() === confirmPassword.val()) {
+            //this.submit = this.submit.bind(this);
+        // } else {
+        //     $('.error').show();
+        //     password.addClass('error');
+        //     confirmPassword.addClass('error');
+        // }
     }
 
     submit() {
-        this.props.history.replaceState(null, 'contact');
     }
 
     render() {
@@ -37,7 +37,7 @@ export default class Signup extends React.Component {
                     <p className='error'>Passwords must match</p>
                     <FormInput label='Confirm Password' type='password' name='confirmPassword' value='' />
                     <p className='error'>Passwords must match</p>
-                    <input type='submit' value='sign up' onClick={this.onclick_submit} />
+                    <input type='submit' value='sign up' onClick={this.onclick_submit.bind(this)} />
                 </form>
                 <Link to='/' className='link'>Login</Link>
             </div>
