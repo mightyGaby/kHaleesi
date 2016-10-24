@@ -1,13 +1,14 @@
 import $ from 'jquery';
 import React from 'react';
+import Map from '../components/map';
 import {Link} from 'react-router';
 
-export default class User extends React.Component {
+export default class Khaleesi extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            khaleesi : []
+            box : []
         };
     }
 
@@ -17,7 +18,7 @@ export default class User extends React.Component {
             url: '/web/data.json',
             success: function(response) {
                 this.setState({
-                    khaleesi: response.khaleesis
+                    box: response.boxes
                 });
             }.bind(this),
             error: function(e) {
@@ -29,30 +30,30 @@ export default class User extends React.Component {
     onclick_trigger(e) {
         e.preventDefault();
 
-        this.props.history.pushState(null, 'khaleesi');
-
+        console.log('here');
     }
 
     render() {
-        let khaleesis = this.state.khaleesi.map((khaleesi, i) => {
+        let boxes = this.state.box.map((box, i) => {
             return (
                 <li key={i} className='col-xs-12'>
                     <div className='row'>
                         <div className='col-xs-6'>
-                            {khaleesi.firstName} {khaleesi.lastName}
+                            {box.boxId} {box.landmark}
                         </div>
                         <div className='col-xs-6'>
-                            {khaleesi.phone}
+                            {box.PIN.code}
                         </div>
                     </div>
                 </li>
             );
         });
         return(
+            
             <ul className='row'>
-                {khaleesis}
+                {boxes}
                 <a className='primary-button' href='#' onClick={this.onclick_trigger.bind(this)}>
-                    <span>Trigger Call for Help</span>
+                    <span>Trigger</span>
                 </a>
             </ul>
         );
