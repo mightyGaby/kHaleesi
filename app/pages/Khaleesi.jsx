@@ -8,6 +8,7 @@ export default class Khaleesi extends React.Component {
 
         this.state = {
             box : [],
+            user: [],
             khaleesi: []
         };
     }
@@ -20,13 +21,13 @@ export default class Khaleesi extends React.Component {
                 this.setState({
                     box: response.boxes,
                     khaleesi: this.getActiveAccount(response),
+                    user: response.users
                 });
             }.bind(this),
             error: function(e) {
                 console.log(e);
             }.bind(this)
         });
-    }
 
     }
 
