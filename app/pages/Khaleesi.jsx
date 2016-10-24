@@ -32,28 +32,36 @@ export default class Khaleesi extends React.Component {
         console.log('here');
     }
 
-    render() {
+    renderAvailableBoxes(){
         let boxes = this.state.box.map((box, i) => {
-            return (
-                <li key={i} className='col-xs-12'>
-                    <div className='row'>
-                        <div className='col-xs-6'>
-                            {box.boxId} {box.landmark}
+            if(!box.empty){
+                return (
+                    <li key={i} className='col-xs-12'>
+                        <div className='row'>
+                            <div className='col-xs-6'>
+                                Box# {box.boxId} {box.landmark}
+                            </div>
+                            <div className='col-xs-6'>
+                                {box.PIN.code}
+                            </div>
                         </div>
-                        <div className='col-xs-6'>
-                            {box.PIN.code}
-                        </div>
-                    </div>
-                </li>
-            );
+                    </li>
+                );
+            }
         });
         return(
-
             <ul className='row'>
                 {boxes}
-                <a className='primary-button' href='#' onClick={this.onclick_trigger.bind(this)}>
-                    <span>Trigger</span>
-                </a>
+            </ul>
+        );
+    }
+
+
+    render() {
+        return(
+            <ul className='row'>
+                <h1> Boxes </h1>
+                { this.renderAvailableBoxes() }
             </ul>
         );
     }
