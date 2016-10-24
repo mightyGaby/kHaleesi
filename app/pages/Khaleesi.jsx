@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import React from 'react';
-import Map from '../components/map';
 import {Link} from 'react-router';
 
 export default class Khaleesi extends React.Component {
@@ -49,7 +48,7 @@ export default class Khaleesi extends React.Component {
             );
         });
         return(
-            
+
             <ul className='row'>
                 {boxes}
                 <a className='primary-button' href='#' onClick={this.onclick_trigger.bind(this)}>
