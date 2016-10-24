@@ -11,20 +11,24 @@ export default class UserContact extends React.Component {
         };
     }
 
-    // componentDidMount() {
-    //     $.ajax({        
-    //         url: 'data.json',
-    //         dataType: 'json',           
-    //         success: function(data) {
-    //           this.setState({datajson: data});
-    //         }.bind(this)
-    //   });
-    // }
+    componentDidMount() {
+        $.ajax({        
+            type: 'get',
+            url: 'data.json',
+            dataType: 'json',           
+            success: function(data) {
+                console.log(data.data);
+                this.setState({
+                    khaleesi: data
+                });
+            }.bind(this)
+        });
+    }
 
     render() {
         return(
             <div>
-                <p>test</p>
+                {this.state.khaleesi}
             </div>  
         );
     }
