@@ -20,9 +20,10 @@ export default class Khaleesi extends React.Component {
             success: function(response) {
                 this.setState({
                     box: response.boxes,
-                    khaleesi: this.getActiveAccount(response),
-                    user: response.users
+                    khaleesi: response.khaleesis[this.getActiveAccountIndex(response)],
+                    user: this.getUserInNeed(response)
                 });
+                console.log(this.state.user)
             }.bind(this),
             error: function(e) {
                 console.log(e);
@@ -31,15 +32,27 @@ export default class Khaleesi extends React.Component {
 
     }
 
-    getActiveAccount(response){
+    getActiveAccountIndex(response){
         for( var i in response.khaleesis){
             if(response.khaleesis[i].activeAccount){
-                return response.khaleesis[i];
+                return i;
             }
         }
     }
 
+    getUserInNeed(response){
+        let khaleesi = response.khaleesis[this.getActiveAccountIndex(response)];
+        let userID = khaleesi.triggeredUser;
+        for ( var i in khaleesi.users){
+            if(khaleesi.users[i].uuid==474743){
+                return khaleesi.users[i];
+            }
+        }
+
+    }
+
     renderAvailableBoxes(){
+
         let boxes = this.state.box.map((box, i) => {
             if(!box.empty){
                 return (
@@ -61,9 +74,6 @@ export default class Khaleesi extends React.Component {
                 {boxes}
             </ul>
         );
-    }
-
-    renderUserAddress(){
     }
 
 
