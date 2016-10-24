@@ -5,10 +5,10 @@
       "lastName": "Slater",
       "userName": "slater407",
       "emailAddress": "test@gmail.com",
-      "phone": "",
+      "phone": "777-777-7777",
       "uuid": "123456",
-      "NOH": false, // naloxone on hand - boolean
-      "available": false,  // boolean - defaults to false until khaleesi confirms availabile
+      "NOH": false, 
+      "available": false,
       "location": {
         "lat": "",
         "lng": ""
@@ -25,10 +25,10 @@
       "lastName": "Ruiz-Funes",
       "userName": "gabgirl24",
       "emailAddress": "test@gmail.com",
-      "phone": "",
+      "phone": "777-777-7777",
       "uuid": "",
-      "NOH": true, // naloxone on hand - boolean
-      "available": false,  // boolean - defaults to false until khaleesi confirms availabile
+      "NOH": true, 
+      "available": false,
       "location": {
         "lat": "",
         "lng": ""
@@ -38,6 +38,95 @@
         "uuid": "",
         "status":"",
         "phone": ""
+      }
+    }
+  ],
+
+  "users": [
+    {
+      "firstName":"",
+      "lastName": "",
+      "userName":"",
+      "phone": "777-777-7777",
+      "uuid":"",
+      "triggered": "", 
+      "location": {
+        "lat": "",
+        "lng": ""
+      },
+      "khaleesis": {
+        "firstName":"",
+        "uuid":"",
+        "available": false,
+        "notified": false,
+        "phone": ""
+      }
+    },
+    {
+      "firstName":"",
+      "lastName": "",
+      "userName":"",
+      "phone": "777-777-7777",
+      "uuid":"",
+      "triggered": "", 
+      "location": {
+        "lat": "",
+        "lng": ""
+      },
+      "khaleesis": {
+        "firstName":"",
+        "uuid":"",
+        "available": false,
+        "notified": false,
+        "phone": ""
+      }
+    }
+  ],
+
+  "boxes": [
+    {
+      "boxId": "",
+      "landmark": "",
+      "empty": false,
+      "PIN": {
+        "code": 242451,
+        "PinActivated": false,
+        "timeGenerated": "",
+        "expires": ""
+      },
+      "location": {
+        "lat": "",
+        "lng": ""
+      }
+    },
+    {
+      "boxId": "",
+      "landmark": "",
+      "empty": false, 
+      "PIN": {
+        "code": 242451,
+        "PinActivated": true,
+        "timeGenerated": "",
+        "expires": ""
+      },
+      "location": {
+        "lat": "",
+        "lng": ""
+      }
+    },
+    {
+      "boxId": "",
+      "landmark": "",
+      "empty": true, 
+      "PIN": {
+        "code": 111111,
+        "PinActivated": false,
+        "timeGenerated": "",
+        "expires": ""
+      },
+      "location": {
+        "lat": "",
+        "lng": ""
       }
     }
   ]

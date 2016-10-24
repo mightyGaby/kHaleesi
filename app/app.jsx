@@ -7,16 +7,14 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import Layout from './pages/Layout';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import UserContact from './pages/UserContact';
-import UserContact from './pages/UserTrigger';
-
+import User from './pages/User';
 
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path='/' component={Layout}>
 			<IndexRoute component={Login}></IndexRoute>
 			<Route path='signup' component={Signup}></Route>
-			<Route path='contact' component={UserContact}></Route>
+			<Route path='user' component={User}></Route>
 		</Route>
 	</Router>,
 document.getElementById('app'));
