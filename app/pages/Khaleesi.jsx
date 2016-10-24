@@ -7,7 +7,8 @@ export default class Khaleesi extends React.Component {
         super(props);
 
         this.state = {
-            box : []
+            box : [],
+            khaleesi: []
         };
     }
 
@@ -17,7 +18,8 @@ export default class Khaleesi extends React.Component {
             url: '/web/data.json',
             success: function(response) {
                 this.setState({
-                    box: response.boxes
+                    box: response.boxes,
+                    khaleesi: this.getActiveAccount(response),
                 });
             }.bind(this),
             error: function(e) {
@@ -56,8 +58,11 @@ export default class Khaleesi extends React.Component {
         );
     }
 
+    renderUserAddress(){
+    }
 
-    render() {
+
+    render() {        
         return(
             <ul className='row'>
                 <h1> Boxes </h1>
