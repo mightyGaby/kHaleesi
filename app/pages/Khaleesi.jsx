@@ -30,6 +30,12 @@ export default class Khaleesi extends React.Component {
 
     }
 
+    getActiveAccount(response){
+        for( var i in response.khaleesis){
+            if(response.khaleesis[i].activeAccount){
+                return response.khaleesis[i];
+            }
+        }
     }
 
     renderAvailableBoxes(){
