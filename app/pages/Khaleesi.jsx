@@ -28,10 +28,8 @@ export default class Khaleesi extends React.Component {
         });
     }
 
-    onclick_trigger(e) {
-        e.preventDefault();
+    }
 
-        console.log('here');
     }
 
     renderAvailableBoxes(){
