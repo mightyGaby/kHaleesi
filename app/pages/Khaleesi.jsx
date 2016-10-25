@@ -34,7 +34,7 @@ export default class Khaleesi extends React.Component {
 
     getActiveAccountIndex(response){
         for( var i in response.khaleesis){
-            if(response.khaleesis[i].activeAccount){
+            if(response.khaleesis[i].loggedIn){
                 return i;
             }
         }
