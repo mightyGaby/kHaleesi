@@ -20,8 +20,6 @@ export default class Signup extends React.Component {
                 "phoneNumber": phoneNumber
             };
 
-        console.log(data);
-
         $.ajax({
             type: 'POST',
             url: action,

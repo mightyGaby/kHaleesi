@@ -26,23 +26,6 @@ export default class User extends React.Component {
         });
     }
 
-    onclick_trigger(e) {
-        e.preventDefault();
-
-        $.ajax({        
-            type: 'POST',
-            url: '/web/data.json',
-            success: function(response) {
-                this.setState({
-                    khaleesi: response.khaleesis
-                });
-            }.bind(this),
-            error: function(e) {
-                console.log(e);
-            }.bind(this)
-        });
-    }
-
     render() {
         let khaleesis = this.state.khaleesi.map((khaleesi, i) => {
             return (
