@@ -59,10 +59,10 @@ export default class Khaleesi extends React.Component {
                     <li key={i} className='col-xs-12'>
                         <div className='row'>
                             <div className='col-xs-6'>
-                                Box# {box.boxId} {box.landmark}
+                                <h2>{box.PIN.code}</h2>
                             </div>
                             <div className='col-xs-6'>
-                                {box.PIN.code}
+                                Box# {box.boxId} {box.landmark}
                             </div>
                         </div>
                     </li>
