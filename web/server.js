@@ -27,7 +27,7 @@ http.createServer(function (req, res) {
 
 		    to: '+1' + data.phoneNumber,
 		    from: '+13212826807',
-		    body: 'Hey ' + data.firstName + ' you are a TB!'
+		    body: 'Hey ' + data.firstName + ' this works!'
 
 		}, function(err, responseData) {
 		    
