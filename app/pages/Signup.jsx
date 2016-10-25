@@ -8,35 +8,39 @@ export default class Signup extends React.Component {
         super();
     }
 
-    onclick_submit() {
-        //e.preventDefault();
+    onclick_submit(e) {
+        e.preventDefault();
 
-        let password = $("input[name='password']"),
-            confirmPassword = $("input[name='confirmPassword']");
+        let form = $('.twilio'),
+            action = form.attr('action'),
+            firstName = $("input[name='firstName']").val(),
+            phoneNumber = $("input[name='phoneNumber']").val(),
+            data = {
+                "firstName": firstName,
+                "phoneNumber": phoneNumber
+            };
 
-        this.props.history.replace(null, '/');
-        //if(password.val() === confirmPassword.val()) {
-            //this.submit = this.submit.bind(this);
-        // } else {
-        //     $('.error').show();
-        //     password.addClass('error');
-        //     confirmPassword.addClass('error');
-        // }
-    }
+        console.log(data);
 
-    submit() {
+        $.ajax({
+            type: 'POST',
+            url: action,
+            data: data,
+            success: function (data) {
+                console.log('data', data);
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
     }
 
     render() {
         return(
             <div className='row'>
-                <form action='' method='' className='col-xs-12'>
-                    <FormInput label='Email Address' type='email' name='emailAddress' value='' />
+                <form action='http://localhost:8080' method='' className='twilio col-xs-12'>
+                    <FormInput label='First Name' type='text' name='firstName' value='' />
                     <FormInput label='Phone Number' type='number' name='phoneNumber' value='' />
-                    <FormInput label='Password' type='password' name='password' value='' />
-                    <p className='error'>Passwords must match</p>
-                    <FormInput label='Confirm Password' type='password' name='confirmPassword' value='' />
-                    <p className='error'>Passwords must match</p>
                     <input type='submit' value='sign up' onClick={this.onclick_submit.bind(this)} />
                 </form>
                 <Link to='/' className='link'>Login</Link>
