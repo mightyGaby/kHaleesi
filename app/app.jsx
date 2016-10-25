@@ -13,8 +13,7 @@ import User from './pages/User';
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path='/' component={Layout}>
-			<IndexRoute component={Login}></IndexRoute>
-			<Route path='signup' component={Signup}></Route>
+			<IndexRoute component={Splash}></IndexRoute>
 			<Route path='user' component={User}></Route>
       <Route path='khaleesi' component={Khaleesi}></Route>
 		</Route>

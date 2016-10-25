@@ -6,6 +6,25 @@ import {Link} from 'react-router';
 export default class Signup extends React.Component {
     constructor() {
         super();
+
+        this.state = {
+            user : []
+        };
+    }
+
+    componentDidMount() {
+        $.ajax({        
+            type: 'GET',
+            url: '/web/data.json',
+            success: function(response) {
+                this.setState({
+                    user: response.users
+                });
+            }.bind(this),
+            error: function(e) {
+                console.log(e);
+            }.bind(this)
+        });
     }
 
     onclick_submit(e) {
@@ -19,8 +38,6 @@ export default class Signup extends React.Component {
                 "firstName": firstName,
                 "phoneNumber": phoneNumber
             };
-
-        console.log(data);
 
         $.ajax({
             type: 'POST',
