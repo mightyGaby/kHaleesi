@@ -1,13 +1,14 @@
 import $ from 'jquery';
 import React from 'react';
+import FormInput from '../components/input';
 import {Link} from 'react-router';
 
-export default class User extends React.Component {
-    constructor(props) {
-        super(props);
+export default class Signup extends React.Component {
+    constructor() {
+        super();
 
         this.state = {
-            khaleesi : []
+            user : []
         };
     }
 
@@ -17,7 +18,7 @@ export default class User extends React.Component {
             url: '/web/data.json',
             success: function(response) {
                 this.setState({
-                    khaleesi: response.khaleesis
+                    user: response.users
                 });
             }.bind(this),
             error: function(e) {
@@ -26,29 +27,41 @@ export default class User extends React.Component {
         });
     }
 
-    render() {
-        let khaleesis = this.state.khaleesi.map((khaleesi, i) => {
-            return (
-                <li key={i} className='col-xs-12'>
-                    <div className='row'>
-                        <div className='col-xs-6'>
-                            {khaleesi.firstName} {khaleesi.lastName}
-                        </div>
-                        <div className='col-xs-6'>
-                            {khaleesi.phone}
-                        </div>
-                    </div>
-                </li>
-            );
+    onclick_submit(e) {
+        e.preventDefault();
+
+        let form = $('.twilio'),
+            action = form.attr('action'),
+            firstName = $("input[name='firstName']").val(),
+            phoneNumber = $("input[name='phoneNumber']").val(),
+            data = {
+                "firstName": firstName,
+                "phoneNumber": phoneNumber
+            };
+
+        $.ajax({
+            type: 'POST',
+            url: action,
+            data: data,
+            success: function (data) {
+                console.log('data', data);
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
         });
+    }
+
+    render() {
         return(
-            <ul className='row'>
-                <h2>Emergency Contact Examples</h2>
-                {khaleesis}
-                <a className='primary-button' href='#' onClick={this.onclick_trigger.bind(this)}>
-                    <span>Trigger</span>
-                </a>
-            </ul>
+            <div className='row'>
+                <form action='http://localhost:8080' method='' className='twilio col-xs-12'>
+                    <FormInput label='First Name' type='text' name='firstName' value='' />
+                    <FormInput label='Phone Number' type='number' name='phoneNumber' value='' />
+                    <input type='submit' value='sign up' onClick={this.onclick_submit.bind(this)} />
+                </form>
+                <Link to='/' className='link'>Login</Link>
+            </div>
         );
     }
 }

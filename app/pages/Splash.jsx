@@ -14,12 +14,7 @@ export default class Login extends React.Component {
     render() {
         return(
             <div className='row'>
-                <form action='' method='' className='col-xs-12'>
-                    <FormInput label='Email Address' type='email' name='emailAddress' value='' />
-                    <FormInput label='Password' type='password' name='password' value='' />
-                    <input type='submit' value='login' />
-                </form>
-                <Link to='signup' className='link col-xs-12'>Sign Up</Link>
+                <h1>Splash Page if needed</h1>
             </div>
         );
     }
