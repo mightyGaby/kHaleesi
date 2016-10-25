@@ -1,6 +1,7 @@
 {
   "khaleesis": [
     {
+      "loggedIn": true,
       "firstName": "Joe",
       "lastName": "Slater",
       "userName": "slater407",
@@ -13,14 +14,26 @@
         "lat": "",
         "lng": ""
       },
-      "users": {
-        "name": "",
-        "uuid": "",
-        "status": "",
-        "phone": ""
+      "users": [
+        {
+          "name": "Henry",
+          "uuid": "474743",
+          "status": "",
+          "phone": ""
+        },
+        {
+          "name": "Henry",
+          "uuid": "22222",
+          "status": "",
+          "phone": ""
+          }
+        ],
+      "triggeredUser": {
+        "uuid": "474743"
       }
     },
     {
+      "loggedIn": false,
       "firstName": "Gaby",
       "lastName": "Ruiz-Funes",
       "userName": "gabgirl24",
@@ -38,6 +51,8 @@
         "uuid": "",
         "status":"",
         "phone": ""
+      },
+      "triggeredUser": {
       }
     }
   ],
@@ -85,11 +100,11 @@
 
   "boxes": [
     {
-      "boxId": "",
-      "landmark": "",
+      "boxId": "12341234",
+      "landmark": "Walgreens",
       "empty": false,
       "PIN": {
-        "code": 242451,
+        "code": 2424,
         "PinActivated": false,
         "timeGenerated": "",
         "expires": ""
@@ -100,11 +115,11 @@
       }
     },
     {
-      "boxId": "",
-      "landmark": "",
+      "boxId": "23452345",
+      "landmark": "CVS",
       "empty": false, 
       "PIN": {
-        "code": 242451,
+        "code": 9451,
         "PinActivated": true,
         "timeGenerated": "",
         "expires": ""
@@ -115,8 +130,8 @@
       }
     },
     {
-      "boxId": "",
-      "landmark": "",
+      "boxId": "56785678",
+      "landmark": "HEB",
       "empty": true, 
       "PIN": {
         "code": 111111,
