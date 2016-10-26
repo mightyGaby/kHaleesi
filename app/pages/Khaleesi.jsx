@@ -7,9 +7,10 @@ export default class Khaleesi extends React.Component {
         super(props);
 
         this.state = {
-            box : [],
+            boxes : [],
             user: [],
-            khaleesi: []
+            khaleesi: [],
+            initialPosition: 'undefined'
         };
     }
 
@@ -19,17 +20,28 @@ export default class Khaleesi extends React.Component {
             url: '/web/data.json',
             success: function(response) {
                 this.setState({
-                    box: response.boxes,
+                    boxes: response.boxes,
                     khaleesi: response.khaleesis[this.getActiveAccountIndex(response)],
                     user: this.getUserInNeed(response)
                 });
-                console.log(this.state.user)
+                console.log(this.createGoogleMapsLink(this.state.boxes[1].location));
             }.bind(this),
             error: function(e) {
                 console.log(e);
             }.bind(this)
         });
 
+
+        navigator.geolocation.getCurrentPosition(this.geolocationSuccess, this.geolocationError, {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000});
+    }
+
+    geolocationSuccess(pos) {
+        var initialPosition = pos.coords;
+        console.log(initialPosition)
+    }
+
+    geolocationError(err) {
+        console.warn('ERROR(' + err.code + '): ' + err.message);
     }
 
     getActiveAccountIndex(response){
@@ -43,6 +55,7 @@ export default class Khaleesi extends React.Component {
     getUserInNeed(response){
         let khaleesi = response.khaleesis[this.getActiveAccountIndex(response)];
         let userID = khaleesi.triggeredUser;
+
         for ( var i in khaleesi.users){
             if(khaleesi.users[i].uuid==474743){
                 return khaleesi.users[i];
@@ -51,9 +64,9 @@ export default class Khaleesi extends React.Component {
 
     }
 
-    renderAvailableBoxes(){
 
-        let boxes = this.state.box.map((box, i) => {
+    renderAvailableBoxes(){
+        let availableBoxes = this.state.boxes.map((box, i) => {
             if(!box.empty){
                 return (
                     <li key={i} className='col-xs-12'>
@@ -71,17 +84,38 @@ export default class Khaleesi extends React.Component {
         });
         return(
             <ul className='row'>
-                {boxes}
+                {availableBoxes}
             </ul>
         );
     }
 
+    getBoxLocation(){
+        // get the location of the closest box using the google proximity API
+        let boxLocation = this.state.boxes[1].location;
+        return (  
+            <p> {boxLocation}</p> 
+        );
+    }
+    
+    createGoogleMapsLink(location) {
+        let map_zoom=19,
+            map_type = "m",
+            output_type= "nl",
+            search_type = "loc",
+            lat = location.lat,
+            lng = location.lng;
 
-    render() {        
+        let googleMapLink = "https://maps.google.com/maps?&q=loc:" + lat + "," + lng + "&z=" + map_zoom + "&mrt=" + search_type + "&t=" + map_type + "&output=" + output_type;
+
+        return ( {googleMapLink} );
+    }
+
+    render() {
         return(
             <ul className='row'>
                 <h1> Boxes </h1>
                 { this.renderAvailableBoxes() }
+                <p>{this.state.initialPosition}</p>
             </ul>
         );
     }
