@@ -6,7 +6,6 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 //Pages
 import Layout from './pages/Layout';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
 import User from './pages/User';
 
 ReactDOM.render(
