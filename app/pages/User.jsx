@@ -45,6 +45,7 @@ export default class Signup extends React.Component {
             data: data,
             success: function (data) {
                 console.log('data', data);
+                this.props.history.pushState(null, 'khaleesiavailable');
             },
             error: function (xhr, status, error) {
                 console.log(error);

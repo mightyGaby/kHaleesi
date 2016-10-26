@@ -1,17 +1,16 @@
 import $ from 'jquery';
 import React from 'react';
+import FormInput from '../components/input';
 import {Link} from 'react-router';
 
-export default class Khaleesi extends React.Component {
-    constructor(props) {
-        super(props);
+export default class KhaleesiAvailable extends React.Component {
+    constructor() {
+        super();
 
-        this.state = {
-            boxes : [],
-            user: [],
-            khaleesi: [],
-            initialPosition: 'undefined'
-        };
+        this.state = ({
+            isVisible: false,
+            khaleesi: []
+        });
     }
 
     componentDidMount() {
@@ -20,103 +19,55 @@ export default class Khaleesi extends React.Component {
             url: '/web/data.json',
             success: function(response) {
                 this.setState({
-                    boxes: response.boxes,
-                    khaleesi: response.khaleesis[this.getActiveAccountIndex(response)],
-                    user: this.getUserInNeed(response)
+                    khaleesi: response.khaleesis[0],
                 });
-                console.log(this.createGoogleMapsLink(this.state.boxes[1].location));
             }.bind(this),
             error: function(e) {
                 console.log(e);
             }.bind(this)
         });
-
-
-        navigator.geolocation.getCurrentPosition(this.geolocationSuccess, this.geolocationError, {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000});
-    }
-
-    geolocationSuccess(pos) {
-        var initialPosition = pos.coords;
-        console.log(initialPosition)
-    }
-
-    geolocationError(err) {
-        console.warn('ERROR(' + err.code + '): ' + err.message);
-    }
-
-    getActiveAccountIndex(response){
-        for( var i in response.khaleesis){
-            if(response.khaleesis[i].loggedIn){
-                return i;
-            }
-        }
-    }
-
-    getUserInNeed(response){
-        let khaleesi = response.khaleesis[this.getActiveAccountIndex(response)];
-        let userID = khaleesi.triggeredUser;
-
-        for ( var i in khaleesi.users){
-            if(khaleesi.users[i].uuid==474743){
-                return khaleesi.users[i];
-            }
-        }
-
     }
 
 
-    renderAvailableBoxes(){
-        let availableBoxes = this.state.boxes.map((box, i) => {
-            if(!box.empty){
-                return (
-                    <li key={i} className='col-xs-12'>
-                        <div className='row'>
-                            <div className='col-xs-6'>
-                                <h2>{box.PIN.code}</h2>
-                            </div>
-                            <div className='col-xs-6'>
-                                Box# {box.boxId} {box.landmark}
-                            </div>
-                        </div>
-                    </li>
-                );
-            }
+
+    onclick_isAvailable(e) {
+        e.preventDefault();
+
+        this.setState({
+            isVisible: true
         });
-        return(
-            <ul className='row'>
-                {availableBoxes}
-            </ul>
-        );
+
+        //call to twilio with yes response
+        //this.props.history.pushState(null, 'khaleesiInfo');
     }
 
-    getBoxLocation(){
-        // get the location of the closest box using the google proximity API
-        let boxLocation = this.state.boxes[1].location;
-        return (  
-            <p> {boxLocation}</p> 
-        );
+    onclick_isNotAvailable(e) {
+        e.preventDefault();
+
+        //call to twilio with no response / with updated emergency procedure
     }
-    
-    createGoogleMapsLink(location) {
-        let map_zoom=19,
-            map_type = "m",
-            output_type= "nl",
-            search_type = "loc",
-            lat = location.lat,
-            lng = location.lng;
 
-        let googleMapLink = "https://maps.google.com/maps?&q=loc:" + lat + "," + lng + "&z=" + map_zoom + "&mrt=" + search_type + "&t=" + map_type + "&output=" + output_type;
+    onclick_submit(e) {
+        e.preventDefault();
 
-        return ( {googleMapLink} );
+        this.props.history.pushState(null, 'khaleesiMap');
     }
 
     render() {
+        let visibleClass = this.state.isVisible ? 'show' : 'hide',
+            locationString = this.state.khaleesi.address;
+
         return(
-            <ul className='row'>
-                <h1> Boxes </h1>
-                { this.renderAvailableBoxes() }
-                <p>{this.state.initialPosition}</p>
-            </ul>
+            <div className='row'>
+                <form action='' method='' className='khaleesiAvail col-xs-12'>
+                    <label>Available?</label>
+                    <button onClick={this.onclick_isAvailable.bind(this)}>Yes</button>
+                    <button>No</button>
+                    <FormInput modifier={visibleClass} label='Naloxone on hand?' type='checkbox' name='naloxoneOnHand' value='yes' />
+                    <FormInput modifier={visibleClass} label='location' type='text' name='location' value='' placeholder={locationString} />
+                    <input className={visibleClass} type='submit' value='Submit' onClick={this.onclick_submit.bind(this)} />
+                </form>
+            </div>
         );
     }
 }

@@ -10,9 +10,10 @@
       "uuid": "123456",
       "NOH": false, 
       "available": false,
+      "address": "8200 Neely Drive",
       "location": {
-        "lat": "",
-        "lng": ""
+        "lng": -97.7617823,
+        "lat": 30.376086
       },
       "users": [
         {

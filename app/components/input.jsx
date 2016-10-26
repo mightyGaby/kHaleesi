@@ -20,14 +20,14 @@ export default class FormInput extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={this.props.modifier}>
                 <label htmlFor={this.props.name}>{this.props.label}</label>
                 <input
                     type={this.props.type}
                     value={this.state.value}
                     id={this.props.name}
                     name={this.props.name}
-                    placeholder={this.props.label}
+                    placeholder={this.props.placeholder}
                     onChange={this.handleChange}
                     required='required'
                 />
