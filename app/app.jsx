@@ -6,6 +6,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 //Pages
 import Layout from './pages/Layout';
 import Login from './pages/Login';
+import Splash from './pages/Splash';
 import User from './pages/User';
 
 ReactDOM.render(
