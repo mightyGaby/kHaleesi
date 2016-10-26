@@ -10,7 +10,7 @@
       "uuid": "123456",
       "NOH": false, 
       "available": false,
-      "address": "8200 Neely Drive",
+      "address": "8200 Neely Drive, Austin TX",
       "location": {
         "lng": -97.7617823,
         "lat": 30.376086
@@ -60,15 +60,15 @@
 
   "users": [
     {
-      "firstName":"",
+      "firstName":"Henry",
       "lastName": "",
       "userName":"",
       "phone": "777-777-7777",
       "uuid":"",
       "triggered": "", 
       "location": {
-        "lat": "",
-        "lng": ""
+        "lat": 30.2802336,
+        "lng": -97.7640027
       },
       "khaleesis": {
         "firstName":"",

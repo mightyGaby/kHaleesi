@@ -36,7 +36,7 @@ export default class KhaleesiAvailable extends React.Component {
         this.setState({
             isVisible: true
         });
-
+        $('button').hide();
         //call to twilio with yes response
         //this.props.history.pushState(null, 'khaleesiInfo');
     }
@@ -63,9 +63,12 @@ export default class KhaleesiAvailable extends React.Component {
                     <label>Available?</label>
                     <button onClick={this.onclick_isAvailable.bind(this)}>Yes</button>
                     <button>No</button>
-                    <FormInput modifier={visibleClass} label='Naloxone on hand?' type='checkbox' name='naloxoneOnHand' value='yes' />
-                    <FormInput modifier={visibleClass} label='location' type='text' name='location' value='' placeholder={locationString} />
-                    <input className={visibleClass} type='submit' value='Submit' onClick={this.onclick_submit.bind(this)} />
+                    <div className={visibleClass}>
+                        <label>Naloxone on Hand?</label>
+                        <FormInput modifier={visibleClass} label='yes' type='checkbox' name='naloxoneOnHand' value='yes'/>
+                        <FormInput modifier={visibleClass} label='location' type='text' name='location' value='asdfasdfsdf' placeholder={locationString} />
+                        <input className={visibleClass} type='submit' value='Submit' onClick={this.onclick_submit.bind(this)} />
+                    </div>
                 </form>
             </div>
         );
