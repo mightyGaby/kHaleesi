@@ -1,9 +1,8 @@
 import $ from 'jquery';
 import React from 'react';
-import FormInput from '../components/input';
 import {Link} from 'react-router';
 
-export default class Login extends React.Component {
+export default class Home extends React.Component {
     constructor() {
         super();
 

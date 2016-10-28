@@ -12,20 +12,20 @@ export default class Signup extends React.Component {
         };
     }
 
-    componentDidMount() {
-        $.ajax({        
-            type: 'GET',
-            url: '/web/data.json',
-            success: function(response) {
-                this.setState({
-                    user: response.users
-                });
-            }.bind(this),
-            error: function(e) {
-                console.log(e);
-            }.bind(this)
-        });
-    }
+    // componentDidMount() {
+    //     $.ajax({        
+    //         type: 'GET',
+    //         url: 'data.json',
+    //         success: function(response) {
+    //             this.setState({
+    //                 user: response.users
+    //             });
+    //         }.bind(this),
+    //         error: function(e) {
+    //             console.log(e);
+    //         }.bind(this)
+    //     });
+    // }
 
     onclick_submit(e) {
         e.preventDefault();
@@ -55,12 +55,12 @@ export default class Signup extends React.Component {
     render() {
         return(
             <div className='row'>
-                <form action='http://localhost:8080' method='' className='twilio col-xs-12'>
+                <form action='http://localhost:3000/twilio' method='' className='twilio col-xs-12'>
                     <FormInput label='First Name' type='text' name='firstName' value='' />
                     <FormInput label='Phone Number' type='number' name='phoneNumber' value='' />
-                    <input type='submit' value='sign up' onClick={this.onclick_submit.bind(this)} />
+                    <input type='submit' value='Send Message' onClick={this.onclick_submit.bind(this)} />
                 </form>
-                <Link to='/' className='link'>Login</Link>
+                <Link to='/' className='link'>Back to home</Link>
             </div>
         );
     }

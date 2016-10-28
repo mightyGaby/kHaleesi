@@ -1,45 +1,41 @@
-var http = require('http'),
-	client = require('twilio')('AC96bb67e5748ab05f575e93eda64fff12','5a5e4d67abd89f1b644f3fb2c2beae90');
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 3000;
+var client = require('twilio')('AC96bb67e5748ab05f575e93eda64fff12','5a5e4d67abd89f1b644f3fb2c2beae90');
 
-function parseParams(str) {
-    return str.split('&').reduce(function (params, param) {
-        var paramSplit = param.split('=').map(function (value) {
-            return decodeURIComponent(value.replace('+', ' '));
-        });
-        params[paramSplit[0]] = paramSplit[1];
-        return params;
-    }, {});
-}
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
-http.createServer(function (req, res) {
-
-    console.log('Request received');
-
-    res.writeHead(200, { 
-        'Content-Type': 'text/plain',
-        'Access-Control-Allow-Origin': '*'
+app.post('/twilio', function(req, res){
+    client.sendMessage({
+        to: '+14077569733',
+        from: '+13212826807',
+        body: 'Hello World from twilio'
+    }, function(err, data){
+        if(err)
+            console.log(err);
+        console.log(data);
     });
-    req.on('data', function (chunk) {
-    	var dataString = chunk.toString('utf8'),
-			data = parseParams(dataString);
+});
 
-        client.sendMessage({
+app.post('/message', function (req, res) {
+    console.log(req.body);
+    var msgFrom = req.body.From;
+    var msgBody = req.body.Body;
 
-		    to: '+1' + data.phoneNumber,
-		    from: '+13212826807',
-		    body: 'Hey ' + data.firstName + ' this works!'
+    res.send(`
+        <Response>
+            <Message>
+                'hey ${msgFrom}'
+            </Message>
+        </Response>
+    `);
+});
 
-		}, function(err, responseData) {
-		    
-		    if (!err) {
-		        console.log(responseData.from);
-		        console.log(responseData.body);
-
-		    }
-		});
-    });
-
-    res.end('{"msg": "OK"}');
-
-}).listen(8080);
-console.log('Server running at http://localhost:8080/');
+app.listen(port);
+console.log('Server running on port: ' + port);

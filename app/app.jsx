@@ -5,14 +5,13 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 //Pages
 import Layout from './pages/Layout';
-import Login from './pages/Login';
-import Splash from './pages/Splash';
+import Home from './pages/Home';
 import User from './pages/User';
 
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path='/' component={Layout}>
-			<IndexRoute component={Splash}></IndexRoute>
+			<IndexRoute component={Home}></IndexRoute>
 			<Route path='user' component={User}></Route>
 		</Route>
 	</Router>,
