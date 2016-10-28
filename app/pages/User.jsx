@@ -15,7 +15,7 @@ export default class Signup extends React.Component {
     componentDidMount() {
         $.ajax({        
             type: 'GET',
-            url: '/web/data.json',
+            url: '/data.json',
             success: function(response) {
                 this.setState({
                     user: response.users
@@ -55,7 +55,7 @@ export default class Signup extends React.Component {
     render() {
         return(
             <div className='row'>
-                <form action='http://localhost:8080' method='' className='twilio col-xs-12'>
+                <form action='http://localhost:3000/message' method='' className='twilio col-xs-12'>
                     <FormInput label='First Name' type='text' name='firstName' value='' />
                     <FormInput label='Phone Number' type='number' name='phoneNumber' value='' />
                     <input type='submit' value='sign up' onClick={this.onclick_submit.bind(this)} />

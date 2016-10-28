@@ -1,5 +1,5 @@
 var http = require('http'),
-	client = require('twilio')('AC96bb67e5748ab05f575e93eda64fff12','5a5e4d67abd89f1b644f3fb2c2beae90');
+	client = require('twilio')('MG4adb1f7b9dc1c98b07d1a6e9078c2f8b','5a5e4d67abd89f1b644f3fb2c2beae90');
 
 function parseParams(str) {
     return str.split('&').reduce(function (params, param) {
@@ -14,6 +14,7 @@ function parseParams(str) {
 http.createServer(function (req, res) {
 
     console.log('Request received');
+
 
     res.writeHead(200, { 
         'Content-Type': 'text/plain',
