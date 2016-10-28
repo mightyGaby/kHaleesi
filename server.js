@@ -1,7 +1,21 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var path = require('path');
 var app = express();
 var port = process.env.PORT || 3000;
 var client = require('twilio')('AC96bb67e5748ab05f575e93eda64fff12','5a5e4d67abd89f1b644f3fb2c2beae90');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.static('web'));
+
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/web/app.html'));
+});
+
+
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -12,19 +26,28 @@ app.use(function (req, res, next) {
 });
 
 app.post('/twilio', function(req, res){
-    client.sendMessage({
-        to: '+14077569733',
+
+    var data = res.req.body;
+
+    client.messages.create({
+
+        to: '+1' + data.phoneNumber,
         from: '+13212826807',
-        body: 'Hello World from twilio'
-    }, function(err, data){
-        if(err)
-            console.log(err);
-        console.log(data);
+        body: 'Hey ' + data.firstName + ' this works!'
+
+    }, function(err, responseData) {
+    
+        if (!err) {
+            console.log(responseData.from);
+            console.log(responseData.body);
+        }
     });
+
+    res.end('{"msg" :"ok"}');
+
 });
 
 app.post('/message', function (req, res) {
-    console.log(req.body);
     var msgFrom = req.body.From;
     var msgBody = req.body.Body;
 
@@ -37,5 +60,6 @@ app.post('/message', function (req, res) {
     `);
 });
 
-app.listen(port);
-console.log('Server running on port: ' + port);
+app.listen(port, function() {
+    console.log('Server running on port: ' + port);
+});
