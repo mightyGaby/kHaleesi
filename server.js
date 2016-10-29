@@ -9,6 +9,7 @@ var client = require('twilio')('AC96bb67e5748ab05f575e93eda64fff12','5a5e4d67abd
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('web'));
+app.use(cookieParser('cookieSecret'))
 
 
 app.get('/', function (req, res) {
@@ -28,6 +29,17 @@ app.use(function (req, res, next) {
 app.post('/twilio', function(req, res){
 
     var data = res.req.body;
+
+    console.log(req.cookies) 
+
+    var options = {
+        maxAge: 1000 * 60 * 15, // would expire after 15 minutes
+        httpOnly: true, // The cookie only accessible by the web server
+        signed: true // Indicates if the cookie should be signed
+    }
+
+    // Set cookie
+    res.cookie('conversation', data, options);
 
     client.messages.create({
 
