@@ -36,7 +36,7 @@ export default class KhaleesiAvailable extends React.Component {
         this.setState({
             isVisible: true
         });
-        $('button').hide();
+        $('.callKhaleesi').hide();
         //call to twilio with yes response
         //this.props.history.pushState(null, 'khaleesiInfo');
     }
@@ -50,6 +50,11 @@ export default class KhaleesiAvailable extends React.Component {
     onclick_submit(e) {
         e.preventDefault();
 
+
+        // get value of checkbox
+        // save as variable
+        //this.props
+        
         this.props.history.pushState(null, 'khaleesiMap');
     }
 
@@ -60,14 +65,16 @@ export default class KhaleesiAvailable extends React.Component {
         return(
             <div className='row'>
                 <form action='' method='' className='khaleesiAvail col-xs-12'>
-                    <label>Available?</label>
-                    <button onClick={this.onclick_isAvailable.bind(this)}>Yes</button>
-                    <button>No</button>
+                    <div className="callKhaleesi">
+                        <label>Available?</label>
+                        <button onClick={this.onclick_isAvailable.bind(this)}>Yes</button>
+                        <button>No</button>
+                    </div>
                     <div className={visibleClass}>
                         <label>Naloxone on Hand?</label>
                         <FormInput modifier={visibleClass} label='yes' type='checkbox' name='naloxoneOnHand' value='yes'/>
-                        <FormInput modifier={visibleClass} label='location' type='text' name='location' value='asdfasdfsdf' placeholder={locationString} />
-                        <input className={visibleClass} type='submit' value='Submit' onClick={this.onclick_submit.bind(this)} />
+                        <FormInput modifier={visibleClass} label='location' type='text' name='location' value={locationString} placeholder={locationString} />
+                        <input className={visibleClass} type='submit' value='Submit' onClick={this.onclick_submit.bind(this)}/>
                     </div>
                 </form>
             </div>
