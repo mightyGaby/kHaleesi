@@ -45,13 +45,14 @@ export default class Signup extends React.Component {
             data: data,
             success: function (data) {
                 console.log('data', data);
-                this.props.history.pushState(null, 'khaleesiavailable');
+                this.props.history.pushState(null, 'khaleesi');
             },
             error: function (xhr, status, error) {
                 console.log(error);
             }
         });
     }
+
 
     render() {
         return(
@@ -61,7 +62,7 @@ export default class Signup extends React.Component {
                     <FormInput label='Phone Number' type='number' name='phoneNumber' value='' />
                     <input type='submit' value='sign up' onClick={this.onclick_submit.bind(this)} />
                 </form>
-                <Link to='/' className='link'>Login</Link>
+
             </div>
         );
     }

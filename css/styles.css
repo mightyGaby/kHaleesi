@@ -119,3 +119,6 @@ ul {
   display: block;
   text-align: center;
   width: 100%; }
+
+#g-map {
+  height: 400px; }

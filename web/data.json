@@ -12,8 +12,8 @@
       "available": false,
       "address": "8200 Neely Drive, Austin TX",
       "location": {
-        "lng": -97.7617823,
-        "lat": 30.376086
+        "lng": -97.761514,
+        "lat": 30.3760366
       },
       "users": [
         {
@@ -67,8 +67,8 @@
       "uuid":"",
       "triggered": "", 
       "location": {
-        "lat": 30.2802336,
-        "lng": -97.7640027
+        "lat": 30.2802649,
+        "lng": -97.7618147
       },
       "khaleesis": {
         "firstName":"",

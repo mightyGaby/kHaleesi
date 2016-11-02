@@ -3,13 +3,14 @@ import React from 'react';
 import FormInput from '../components/input';
 import {Link} from 'react-router';
 
-export default class KhaleesiAvailable extends React.Component {
-    constructor() {
-        super();
+export default class Khaleesi extends React.Component {
+    constructor(props) {
+        super(props);
 
         this.state = ({
             isVisible: false,
-            khaleesi: []
+            khaleesi: [],
+            naloxoneOnHand: null
         });
     }
 
@@ -26,6 +27,7 @@ export default class KhaleesiAvailable extends React.Component {
                 console.log(e);
             }.bind(this)
         });
+
     }
 
 
@@ -41,21 +43,15 @@ export default class KhaleesiAvailable extends React.Component {
         //this.props.history.pushState(null, 'khaleesiInfo');
     }
 
-    onclick_isNotAvailable(e) {
-        e.preventDefault();
-
-        //call to twilio with no response / with updated emergency procedure
-    }
-
     onclick_submit(e) {
         e.preventDefault();
+        let naloxoneOnHand = $('[name="naloxoneOnHand"]').prop("checked");
 
-
-        // get value of checkbox
-        // save as variable
-        //this.props
-        
-        this.props.history.pushState(null, 'khaleesiMap');
+        if(!naloxoneOnHand){
+            this.props.history.pushState(naloxoneOnHand, 'boxes');
+        } else {
+            this.props.history.pushState(naloxoneOnHand, 'route_to_user');
+        }
     }
 
     render() {
@@ -72,7 +68,7 @@ export default class KhaleesiAvailable extends React.Component {
                     </div>
                     <div className={visibleClass}>
                         <label>Naloxone on Hand?</label>
-                        <FormInput modifier={visibleClass} label='yes' type='checkbox' name='naloxoneOnHand' value='yes'/>
+                        <FormInput modifier={visibleClass} label='yes' type='checkbox' name='naloxoneOnHand'/>
                         <FormInput modifier={visibleClass} label='location' type='text' name='location' value={locationString} placeholder={locationString} />
                         <input className={visibleClass} type='submit' value='Submit' onClick={this.onclick_submit.bind(this)}/>
                     </div>
