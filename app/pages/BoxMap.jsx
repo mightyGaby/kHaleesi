@@ -2,7 +2,7 @@ import $ from 'jquery';
 import React from 'react';
 import GoogleMap from '../components/googleMap';
 import {Link} from 'react-router';
-var myLatlng, map, bounds;
+var myLatlng, userCoords, closestBoxCoords, map, bounds, directionsService, directionsDisplay;
 
 export default class BoxMap extends React.Component {
     
@@ -32,8 +32,9 @@ export default class BoxMap extends React.Component {
                 myLatlng = new google.maps.LatLng(khaleesiCoords.lat, khaleesiCoords.lng);
                 this.renderGoogleMap();
                 this.renderAvailableBoxes();
-                this.renderUserMarker();
                 this.findClosestBox();
+                this.calculateAndDisplayRoute(directionsService, directionsDisplay, myLatlng, this.state.user.location);
+
             }.bind(this),
             error: function(e) {
                 console.log(e);
@@ -50,10 +51,69 @@ export default class BoxMap extends React.Component {
         };
         //Render google maps in #map container
         map = new google.maps.Map(document.getElementById('g-map'), mapOptions);
-        this.addMarker(myLatlng,'Khaleesi',{color:'blue'});
+        // Instantiate a directions service.
+        directionsService = new google.maps.DirectionsService,
+        directionsDisplay = new google.maps.DirectionsRenderer({
+          map: map
+        });
     }
 
-    addMarker(location,name, markerObj) {
+// ======= DISTANCE CALCULATIONS =======
+
+    // use google geometry library to find the closest box
+    findClosestBox() {
+        var boxArray = [],
+            nearestDistance;
+        this.state.boxes.map((box, i) => {
+            if(!box.empty){
+                let boxCoords = new google.maps.LatLng(box.location.lat, box.location.lng,);
+                boxArray.push({
+                    "boxId": box.boxId,
+                    "distanceFromKhaleesi": google.maps.geometry.spherical.computeDistanceBetween(myLatlng, boxCoords)/1609.34,
+                    "coords": boxCoords
+                });
+            }
+        });
+
+        nearestDistance = Math.min.apply(this,$.map(boxArray, function(o){ return o.distanceFromKhaleesi; }));
+
+        let closestBox = boxArray.filter(function(e){
+                return (e.distanceFromKhaleesi==nearestDistance) ? true:false;
+            })[0];
+        closestBoxCoords = closestBox.coords;
+
+        return ( 
+            closestBox
+        )
+        
+    }
+
+    calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+        console.log(this.state.khaleesi.location)
+      directionsService.route({
+        origin: pointA,
+        destination: pointB,
+        travelMode: google.maps.TravelMode.DRIVING
+      }, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+
+    onclick_displayDirectionsToBox(e) {
+        e.preventDefault();
+
+        this.calculateAndDisplayRoute(directionsService, directionsDisplay, this.state.khaleesi.location, closestBoxCoords);
+
+    }
+
+//  ======= MARKERS =======
+
+    // generic render marker function, with the option to customize the marker and label
+    addMarker(location,name, markerObj, label) {
         var markerImage, labelContent;
 
         if(markerObj.color) {
@@ -80,8 +140,9 @@ export default class BoxMap extends React.Component {
 
     // gets user's location and adds a marker on the map
     renderUserMarker(){
-        let userLocation = this.state.user.location,
-            userCoords = new google.maps.LatLng(userLocation.lat, userLocation.lng);
+        let userLocation = this.state.user.location;
+
+        userCoords = new google.maps.LatLng(userLocation.lat, userLocation.lng);
         this.addMarker(userCoords, 'User', {color:'red'});
     }
 
@@ -102,35 +163,12 @@ export default class BoxMap extends React.Component {
         return({availableBoxes});
     }
 
-    // use google geometry library to find the closest box
-    findClosestBox() {
-        var boxArray = [],
-            nearestDistance;
-        this.state.boxes.map((box, i) => {
-            if(!box.empty){
-                let boxCoords = new google.maps.LatLng(box.location.lat, box.location.lng,);
-                boxArray.push({
-                    "boxId": box.boxId,
-                    "distanceFromKhaleesi": google.maps.geometry.spherical.computeDistanceBetween(myLatlng, boxCoords)/1609.34
-                });
-            }
-        });
-
-        nearestDistance = Math.min.apply(this,$.map(boxArray, function(o){ return o.distanceFromKhaleesi; }));
-
-        return ( 
-            boxArray.filter(function(e){
-                return (e.distanceFromKhaleesi==nearestDistance) ? true:false;
-            })[0]
-        )
-        
-    }
-
     render() {
         return(
             <div className='row'>
             <h1>Box Locations</h1>
-                <GoogleMap />
+            <GoogleMap />
+            <button className="boxRoute" onClick={this.onclick_displayDirectionsToBox.bind(this)}> get directions to closest box </button>
             </div>
         );
     }
