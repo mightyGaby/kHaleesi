@@ -13,7 +13,6 @@ import UserMap from './pages/UserOnlyMap';
 
 
 
-
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path='/' component={Layout}>

@@ -56,7 +56,6 @@ export default class Khaleesi extends React.Component {
         });
         $('.callKhaleesi').hide();
         //call to twilio with yes response
-        //this.props.history.pushState(null, 'khaleesiInfo');
     }
 
     onclick_submit(e) {
@@ -71,10 +70,11 @@ export default class Khaleesi extends React.Component {
             let form = $('.twilio'),
                 action = form.attr('action'),
                 data = {
-                    "googleMapLink": mapURL
+                    "googleMapLink": mapURL,
+                    "boxPin": this.state.boxes[1].PIN.code
                 };
             this.postToTwilio(action,data)
-            //this.props.history.pushState(null, 'boxes');
+            this.props.history.pushState(null, 'boxes');
 
         } else {
             //go to the map with only the user's location because the khaleesi has naloxone

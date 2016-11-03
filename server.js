@@ -25,9 +25,9 @@ http.createServer(function (req, res) {
 
         client.sendMessage({
 
-		    to: '+1' + data.phoneNumber,
+		    to: '+18479222290',
 		    from: '+13212826807',
-		    body: 'Hey ' + data.firstName + ' this works!'
+		    body: 'Naloxone is on the way! The Pin is: ' + data.boxPin + ' Here is the link to the box location ' + data.googleMapLink
 
 		}, function(err, responseData) {
 		    
